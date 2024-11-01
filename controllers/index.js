@@ -1,12 +1,10 @@
-const productController = require("./productController");
-const shopController = require("./shopController");
+const carController = require("./pcarController");
 const userController = require("./userController");
 const authController = require("./authController");
 const systemController = require("./systemController");
 
 module.exports = {
-  productController,
-  shopController,
+  carController,
   userController,
   authController,
   systemController,
