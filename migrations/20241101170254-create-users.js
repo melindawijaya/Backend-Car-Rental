@@ -21,6 +21,12 @@ module.exports = {
       role: {
         type: Sequelize.STRING
       },
+      age: {
+        type: Sequelize.INTEGER
+      },
+      address: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

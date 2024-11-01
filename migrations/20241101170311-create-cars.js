@@ -5,35 +5,45 @@ module.exports = {
     await queryInterface.createTable('Cars', {
       id: {
         allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
-        type: Sequelize.INTEGER
       },
-      make: {
-        type: Sequelize.STRING
+      plate: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      transmission: {
+        type: Sequelize.STRING,
+      },
+      manufacture: {
+        type: Sequelize.STRING,
       },
       model: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+      },
+      available: {
+        type: Sequelize.BOOLEAN,
+      },
+      type: {
+        type: Sequelize.STRING,
       },
       year: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
-      createdBy: {
-        type: Sequelize.INTEGER
+      options: {
+        type: Sequelize.JSON, // Menggunakan JSON untuk menyimpan array options
       },
-      updatedBy: {
-        type: Sequelize.INTEGER
-      },
-      deletedBy: {
-        type: Sequelize.INTEGER
+      specs: {
+        type: Sequelize.JSON, // Menggunakan JSON untuk menyimpan array specs
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       }
     });
   },
