@@ -4,11 +4,10 @@ const { Op } = require("sequelize");
 const { parse } = require("dotenv");
 
 const createCar = async (req, res) => {
-  const { id, plate, transmission, manufacture, model, type, year } = req.body;
+  const { plate, transmission, manufacture, model, type, year } = req.body;
 
   try {
     const newCar = await Cars.create({
-      id,
       plate,
       transmission,
       manufacture,
@@ -55,7 +54,17 @@ const createCar = async (req, res) => {
 
 const getAllCar = async (req, res) => {
   try {
-    const { id, plate, transmission, manufacture, model, type, year, page, size } = req.query;
+    const {
+      id,
+      plate,
+      transmission,
+      manufacture,
+      model,
+      type,
+      year,
+      page,
+      size,
+    } = req.query;
 
     const carCondition = {};
     if (id) carCondition.id = id;
@@ -70,11 +79,11 @@ const getAllCar = async (req, res) => {
 
     const pageSize = parseInt(size) || 10;
     const pageNum = parseInt(page) || 1;
-    const offset = (pageNum - 1) * pageSize; 
+    const offset = (pageNum - 1) * pageSize;
 
     const totalCount = await Cars.count({
       where: carCondition,
-    })
+    });
 
     const cars = await Cars.findAll({
       attributes: [
@@ -98,13 +107,13 @@ const getAllCar = async (req, res) => {
       message: "Success get cars data",
       isSuccess: true,
       data: {
-        totalData : totalCount,
+        totalData: totalCount,
         cars,
         pagination: {
           page: pageNum,
           size: pageSize,
-          totalPages
-        }
+          totalPages,
+        },
       },
     });
   } catch (error) {
@@ -135,7 +144,7 @@ const getCarById = async (req, res) => {
     const product = await Cars.findOne({
       where: {
         id,
-      }
+      },
     });
 
     res.status(200).json({
@@ -187,15 +196,20 @@ const updateCar = async (req, res) => {
       });
     }
 
-    await Cars.update({
-      id, 
-      plate,
-      transmission,
-      manufacture,
-      model,
-      type,
-      year,
-    });
+    await Cars.update(
+      {
+        id,
+        plate,
+        transmission,
+        manufacture,
+        model,
+        type,
+        year,
+      },
+      {
+        where: { id },
+      }
+    );
 
     res.status(200).json({
       status: "Success",
@@ -245,7 +259,7 @@ const deleteCar = async (req, res) => {
     });
 
     if (!car) {
-      res.status(404).json({
+      return res.status(404).json({
         status: "Failed",
         message: "Data not found",
         isSuccess: false,
@@ -285,7 +299,7 @@ const deleteCar = async (req, res) => {
 };
 
 module.exports = {
-  CarController: {
+  carController: {
     createCar,
     getAllCar,
     getCarById,

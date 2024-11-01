@@ -1,0 +1,15 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Shop API",
+    "description": "API documentation for the shop and product system",
+    "version": "1.0.0"
+  },
+  "tags": [
+    { "name": "Products", "description": "Operations related to products" },
+    { "name": "Shops", "description": "Operations related to shops" },
+    { "name": "Users", "description": "Operations related to users" }
+  ],
+  "paths": {
+  }
+}
