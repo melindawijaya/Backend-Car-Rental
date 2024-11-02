@@ -3,14 +3,14 @@ const { Users } = require("../models");
 const { Op } = require("sequelize");
 
 const createUsers = async (req, res) => {
-  const { name, age, role, address } = req.body;
+  const { name, age, role, address, } = req.body;
 
   try {
     const newUser = await Users.create({
       name,
       age,
       role,
-      address,
+      address
     });
 
     res.status(201).json({
@@ -65,7 +65,7 @@ const findUsers = async (req, res, next) => {
     const totalCount = await Users.count({ where: condition});
 
     const users = await Users.findAll({
-      attributes: ["name", "age", "role"],
+      attributes: ["name", "age", "role", "password"],
       where: condition,
       limit: pageSize,
       offset
@@ -126,15 +126,14 @@ const findUserById = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
-  const { name, age, role, address, shopId } = req.body;
+  const { name, age, role, address } = req.body;
   try {
     await Users.update(
       {
         name,
         age,
         role,
-        address,
-        shopId,
+        address
       },
       {
         where: {

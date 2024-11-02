@@ -4,11 +4,62 @@ const { Auths, Users } = require("../models");
 
 const register = async (req, res, next) => {
   try {
+    const { name, age, role, address, password, email, confirmPassword } = req.body;
+
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        status: "Failed",
+        message: "Passwords do not match",
+        isSuccess: false,
+        data: null,
+      });
+    }
+    
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = await Users.create({
+      name,
+      age,
+      role,
+      address,
+      password: hashedPassword,
+      email
+    });
+
     res.status(201).json({
       status: "Success",
-      data: {},
+      message: "Success register",
+      isSuccess: true,
+      data: {
+        newUser,
+      },
     });
-  } catch (err) {}
+  } catch (error) {
+    console.log(error.name);
+    if (error.name === "SequelizeValidationError") {
+      const errorMessage = error.errors.map((err) => err.message);
+      return res.status(400).json({
+        status: "Failed",
+        message: errorMessage[0],
+        isSuccess: false,
+        data: null,
+      });
+    } else if (error.name === "SequelizeDatabaseError") {
+      return res.status(400).json({
+        status: "Failed",
+        message: error.message || "Database error",
+        isSuccess: false,
+        data: null,
+      });
+    } else {
+      return res.status(500).json({
+        status: "Failed",
+        message: "An unexpected error occurred",
+        isSuccess: false,
+        data: null,
+      });
+    }
+  }
 };
 
 const login = async (req, res, next) => {
