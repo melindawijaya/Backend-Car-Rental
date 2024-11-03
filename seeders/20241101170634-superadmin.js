@@ -6,9 +6,11 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Users', [{
       name: 'Super Admin',
-      email: 'superadmin@example.com',
+      email: 'superadmin@gmail.com',
       password: await bcrypt.hash('superadmin123', 10),
       role: 'superadmin',
+      age: 35,
+      address: 'Rhino Streets',
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
@@ -16,11 +18,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete('Users', { email: 'superadmin@gmail.com' }, {});
   }
 };

@@ -16,6 +16,23 @@ module.exports = {
           len: [3, 100],
         }
       },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          isEmail: {
+            msg: 'Must be a valid email address'
+          }
+        }
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          len: [6, 100],
+        }
+      },
       role: {
         type: Sequelize.STRING,
         allowNull: false,

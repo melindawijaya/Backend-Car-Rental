@@ -1,5 +1,5 @@
 const { where } = require("sequelize");
-const { Cars, Shops } = require("../models");
+const { Cars } = require("../models");
 const { Op } = require("sequelize");
 const { parse } = require("dotenv");
 
@@ -141,18 +141,20 @@ const getCarById = async (req, res) => {
   const id = req.params.id;
 
   try {
-    const product = await Cars.findOne({
+    const car = await Cars.findOne({
       where: {
         id,
       },
     });
+
+    console.log(car);
 
     res.status(200).json({
       status: "Success",
       message: "Success get car data",
       isSuccess: true,
       data: {
-        product,
+        car
       },
     });
   } catch (error) {

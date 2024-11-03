@@ -22,5 +22,13 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Auths',
   });
+
+  Auths.associate = (models) => {
+    Auths.belongsTo(models.Users, {
+      foreignKey: 'userId',
+      as: 'user'
+    });
+  };
+  
   return Auths;
 };

@@ -1,15 +1,1163 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Shop API",
-    "description": "API documentation for the shop and product system",
+    "title": "Car Management API",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1"
+    }
+  ],
   "tags": [
-    { "name": "Products", "description": "Operations related to products" },
-    { "name": "Shops", "description": "Operations related to shops" },
-    { "name": "Users", "description": "Operations related to users" }
+    {
+      "name": "Cars"
+    },
+    {
+      "name": "Users"
+    },
+    {
+      "name": "Auth"
+    }
   ],
   "paths": {
+    "/cars": {
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "All Data Query Search",
+        "parameters": [
+          {
+            "name": "transmission",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "automatic"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "1770"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"6ea-7TZyctUSjiD7+WYpAzeHQXMEpds\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 18:24:55 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Success get cars data",
+                  "isSuccess": true,
+                  "data": {
+                    "totalData": 11,
+                    "cars": [
+                      {
+                        "id": "6e2bc663-5197-441a-957b-bc75e4a2da7c",
+                        "plate": "DBH-3491",
+                        "transmission": "Automatic",
+                        "manufacture": "Ford",
+                        "model": "F150",
+                        "type": "Sedan",
+                        "year": 2022
+                      },
+                      {
+                        "id": "9ff03bbc-b18c-4ba7-8f3a-4c4b5c2f6c77",
+                        "plate": "WXB-3984",
+                        "transmission": "Automatic",
+                        "manufacture": "BMW",
+                        "model": "X5",
+                        "type": "Convertible",
+                        "year": 2019
+                      },
+                      {
+                        "id": "23574b8f-3e89-4685-a348-67c1f7e5b3c4",
+                        "plate": "BHD-3923",
+                        "transmission": "Automatic",
+                        "manufacture": "Lincoln",
+                        "model": "Navigator",
+                        "type": "Minivan",
+                        "year": 2020
+                      },
+                      {
+                        "id": "752685ce-dd39-40e5-9af5-93fdd36dea7e",
+                        "plate": "BTW-1960",
+                        "transmission": "Automatic",
+                        "manufacture": "Honda",
+                        "model": "Accord",
+                        "type": "Sedan",
+                        "year": 2020
+                      },
+                      {
+                        "id": "0d5de078-a5fc-456b-9487-47eb450a01c6",
+                        "plate": "STL-7347",
+                        "transmission": "Automatic",
+                        "manufacture": "Buick",
+                        "model": "LaCrosse",
+                        "type": "Extended Cab Pickup",
+                        "year": 2012
+                      },
+                      {
+                        "id": "803593fb-b857-4a01-adc4-651538217a04",
+                        "plate": "YND-1892",
+                        "transmission": "Automatic",
+                        "manufacture": "Chevy",
+                        "model": "Malibu",
+                        "type": "Coupe",
+                        "year": 2019
+                      },
+                      {
+                        "id": "08cbd537-497f-4305-b7b4-e7493c703a2c",
+                        "plate": "ZAG-8112",
+                        "transmission": "Automatic",
+                        "manufacture": "Ford",
+                        "model": "F150",
+                        "type": "Convertible",
+                        "year": 2021
+                      },
+                      {
+                        "id": "950575d6-958c-422e-a46b-c3ed2e1315ed",
+                        "plate": "MRQ-2982",
+                        "transmission": "Automatic",
+                        "manufacture": "Audi",
+                        "model": "A4",
+                        "type": "Crew Cab Pickup",
+                        "year": 2012
+                      },
+                      {
+                        "id": "fc1d3297-ab17-40a9-a79c-ca7307ed5faa",
+                        "plate": "LSI-6227",
+                        "transmission": "Automatic",
+                        "manufacture": "Audi",
+                        "model": "S5",
+                        "type": "Coupe",
+                        "year": 2020
+                      },
+                      {
+                        "id": "432d9ed1-e330-4953-ac33-f51a60a5799b",
+                        "plate": "OAI-9575",
+                        "transmission": "Automatic",
+                        "manufacture": "Toyota",
+                        "model": "Camry",
+                        "type": "Extended Cab Pickup",
+                        "year": 2022
+                      }
+                    ],
+                    "pagination": {
+                      "page": 1,
+                      "size": 10,
+                      "totalPages": 2
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Create Data",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "plate": "H-1",
+                  "transmission": "Automatic",
+                  "manufacture": "Honda",
+                  "model": "Civic",
+                  "type": "Sedan",
+                  "year": 2024
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "349"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"15d-TkVKkr/iFI/tPwH44uh4vtp0UHQ\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 18:39:11 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Success create new car",
+                  "isSuccess": true,
+                  "data": {
+                    "newCar": {
+                      "id": "5ff06097-3cc1-4ffc-900b-afea60b7c900",
+                      "plate": "H-1",
+                      "transmission": "Automatic",
+                      "manufacture": "Honda",
+                      "type": "Sedan",
+                      "year": 2024,
+                      "updatedAt": "2024-11-01T18:39:11.421Z",
+                      "createdAt": "2024-11-01T18:39:11.421Z",
+                      "available": null,
+                      "options": null,
+                      "specs": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "92"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"5c-qSOo8EoCHjizql+9frQ01/rnYAs\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 18:27:16 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "message": "column \"make\" does not exist",
+                  "isSuccess": false,
+                  "data": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars/5ff06097-3cc1-4ffc-900b-afea60b7c900": {
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Data By Id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "348"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"15c-7gjzDi1P/TPW2O2Obt0xCovf+bo\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 18:40:09 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Success get car data",
+                  "isSuccess": true,
+                  "data": {
+                    "product": {
+                      "id": "5ff06097-3cc1-4ffc-900b-afea60b7c900",
+                      "plate": "H-1",
+                      "transmission": "Automatic",
+                      "manufacture": "Honda",
+                      "available": null,
+                      "type": "Sedan",
+                      "year": 2024,
+                      "options": null,
+                      "specs": null,
+                      "createdAt": "2024-11-01T18:39:11.421Z",
+                      "updatedAt": "2024-11-01T18:39:11.421Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "137"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"89-8mrDRx9/pMLeWKfmrgTwN+jpHGA\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 18:40:24 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "message": "invalid input syntax for type uuid: \"5ff06097-3cc-4ffc-900b-afea60b7c900\"",
+                  "isSuccess": false,
+                  "data": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/12": {
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Data By Id Auth",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "anything"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Users Query Search",
+        "parameters": [
+          {
+            "name": "role",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "admin"
+          },
+          {
+            "name": "age",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "10"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "208"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"d0-8xFaGsf+MuF4ettO89Hau4Xsehs\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 18:42:24 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Success get shops data",
+                  "isSuccess": true,
+                  "data": {
+                    "totalData": 1,
+                    "users": [
+                      {
+                        "name": "Anne Rippin-Heaney",
+                        "age": 10,
+                        "role": "admin"
+                      }
+                    ],
+                    "pagination": {
+                      "page": 1,
+                      "size": 10,
+                      "totalPages": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "{{base_url}}/users",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Buddy",
+                  "age": 28,
+                  "role": "admin",
+                  "address": "Cactus Street",
+                  "password": "admin3"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Users",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "103"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "51"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"33-wmg/5hO7pd5BqTAaw/goiLiyo50\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 18:47:17 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "sukses delete user"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "75"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"4b-+p65kW9S9ZbIceMWizps7k81ox8\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 18:45:28 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "message": "API not found",
+                  "isSuccess": false,
+                  "data": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login Super Admin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Super Admin",
+                  "email": "superadmin@gmail.com",
+                  "password": "superadmin123",
+                  "age": 35,
+                  "address": "Rhino Streets",
+                  "role": "superadmin"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "82"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"52-osBUuimcO241iJVZoLxoP2XnyOU\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 17:29:51 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "message": "Email not registered",
+                  "isSuccess": false,
+                  "data": null
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "73"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"49-AJL8E04mLJjPlZ4jwMeuDh4fIjE\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sat, 02 Nov 2024 17:19:32 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "message": "Login False",
+                  "isSuccess": false,
+                  "data": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health-check": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "health-check",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "91"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"5b-3NnrRhTWw0d9Rt7wU0GbLv1/aAc\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 01 Nov 2024 18:22:56 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Success",
+                  "message": "Application passed healtcheck",
+                  "isSuccess": true,
+                  "data": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nothing": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Not Found",
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "75"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"4b-+p65kW9S9ZbIceMWizps7k81ox8\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 22 Oct 2024 17:09:30 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "Failed",
+                  "message": "API not found",
+                  "isSuccess": false,
+                  "data": null
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
