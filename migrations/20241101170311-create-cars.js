@@ -13,43 +13,67 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      transmission: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       manufacture: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       model: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+      },
+      image: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      rentPerDay: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      capacity: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      availableAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      transmission: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       available: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: false,
       },
       type: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       year: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       options: {
-        type: Sequelize.JSON, 
+        type: Sequelize.JSON,
+        allowNull: true,
       },
       specs: {
-        type: Sequelize.JSON, 
+        type: Sequelize.JSON,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       }
     });
   },

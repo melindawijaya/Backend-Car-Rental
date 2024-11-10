@@ -1,6 +1,5 @@
 'use strict';
 
-const { faker } = require('@faker-js/faker');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
@@ -14,10 +13,9 @@ module.exports = {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       auths.push({
-        email: faker.internet.email(),
         password: hashedPassword,
         confirmPassword: hashedPassword,
-        userId: userIds[i % userIds.length].id,
+        userId: userIds[i % userIds.length].id, 
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -27,5 +25,6 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('Auths', null, {});
+    await queryInterface.bulkDelete('Users', null, {});
   }
 };

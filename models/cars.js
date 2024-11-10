@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       year: DataTypes.INTEGER,
       options: DataTypes.JSON,
-      specs: DataTypes.JSON,
+      specs: DataTypes.JSON
     },
     {
       sequelize,

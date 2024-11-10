@@ -55,45 +55,56 @@ const createCar = async (req, res) => {
 const getAllCar = async (req, res) => {
   try {
     const {
-      id,
-      plate,
-      transmission,
-      manufacture,
-      model,
-      type,
-      year,
-      page,
-      size,
+      driverType,
+      date,
+      numberOfPassengers,
+      page = 1,
+      size = 10,
     } = req.query;
 
     const carCondition = {};
-    if (id) carCondition.id = id;
-    if (manufacture)
-      carCondition.manufacture = { [Op.iLike]: `%${manufacture}%` };
-    if (plate) carCondition.plate = { [Op.iLike]: `%${plate}%` };
-    if (transmission)
-      carCondition.transmission = { [Op.iLike]: `%${transmission}%` };
-    if (model) carCondition.model = { [Op.iLike]: `%${model}%` };
-    if (type) carCondition.type = { [Op.iLike]: `%${type}%` };
-    if (year) carCondition.year = year;
 
-    const pageSize = parseInt(size) || 10;
-    const pageNum = parseInt(page) || 1;
+    // Menangani pencarian berdasarkan driverType (true/false)
+    if (driverType !== undefined) {
+      // Mengonversi driverType menjadi boolean
+      const isAutomatic = driverType === 'true'; // Jika true, mencari mobil dengan transmisi otomatis
+      carCondition.transmission = isAutomatic ? 'Automatic' : 'Manual';  // Jika false, mencari mobil dengan transmisi manual
+    }
+
+    // Menangani pencarian berdasarkan date (availableAt)
+    if (date) {
+      const parsedDate = new Date(date);
+      if (!isNaN(parsedDate.getTime())) {
+        carCondition.availableAt = { [Op.lte]: parsedDate };  // Mencari mobil yang tersedia pada atau sebelum tanggal ini
+      } else {
+        return res.status(400).json({
+          status: "Failed",
+          message: "Invalid date format",
+          isSuccess: false,
+          data: null,
+        });
+      }
+    }
+
+    // Menangani pencarian berdasarkan numberOfPassengers (capacity)
+    if (numberOfPassengers) {
+      carCondition.capacity = { [Op.gte]: numberOfPassengers };  // Mencari mobil dengan kapasitas >= numberOfPassengers
+    }
+
+    const pageSize = parseInt(size);
+    const pageNum = parseInt(page);
     const offset = (pageNum - 1) * pageSize;
 
+    // Menghitung total data mobil yang cocok dengan filter
     const totalCount = await Cars.count({
       where: carCondition,
     });
 
+    // Mengambil data mobil dengan filter dan pagination
     const cars = await Cars.findAll({
       attributes: [
-        "id",
-        "plate",
-        "transmission",
-        "manufacture",
-        "model",
-        "type",
-        "year",
+        "id", "plate", "manufacture", "model", "image", "rentPerDay", "capacity", "description",
+        "availableAt", "transmission", "type", "year", "options", "specs"
       ],
       where: carCondition,
       limit: pageSize,
@@ -104,7 +115,7 @@ const getAllCar = async (req, res) => {
 
     res.status(200).json({
       status: "Success",
-      message: "Success get cars data",
+      message: "Successfully fetched car data",
       isSuccess: true,
       data: {
         totalData: totalCount,
@@ -118,16 +129,6 @@ const getAllCar = async (req, res) => {
     });
   } catch (error) {
     console.log(error.name);
-    if (error.name === "SequelizeValidationError") {
-      const errorMessage = error.errors.map((err) => err.message);
-      return res.status(400).json({
-        status: "Failed",
-        message: errorMessage[0],
-        isSuccess: false,
-        data: null,
-      });
-    }
-
     res.status(500).json({
       status: "Failed",
       message: error.message,
@@ -141,20 +142,18 @@ const getCarById = async (req, res) => {
   const id = req.params.id;
 
   try {
-    const car = await Cars.findOne({
+    const product = await Cars.findOne({
       where: {
         id,
       },
     });
-
-    console.log(car);
 
     res.status(200).json({
       status: "Success",
       message: "Success get car data",
       isSuccess: true,
       data: {
-        car
+        product,
       },
     });
   } catch (error) {
